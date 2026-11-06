@@ -5,23 +5,24 @@ Please see the corresponding sections below for details.
 Dependencies
 ============
 
-  URI: <first dependency>
-  branch: <branch name>
+  URI: https://git.openembedded.org/openembedded-core
+  branch: wrynose
 
-  URI: <second dependency>
-  branch: <branch name>
+  URI: https://git.yoctoproject.org/meta-yocto
+  layers: meta-poky
+  branch: wrynose
 
-  .
-  .
-  .
+  URI: https://github.com/agherzan/meta-raspberrypi
+  branch: wrynose
 
 Patches
 =======
 
-Please submit any patches against the meta-stevensuslipayload2627 layer to the xxxx mailing list (xxxx@zzzz.org)
-and cc: the maintainer:
+Please submit changes to the meta-stevensuslipayload2627 layer as GitHub pull requests against:
 
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
+  https://github.com/Stevens-Rocketry/RocketryUSLIPayloadYocto20262027
+
+Maintainer: George Oliynyk <goliynyk@stevens.edu>
 
 Table of Contents
 =================
@@ -31,11 +32,35 @@ Table of Contents
 
 
 I. Adding the meta-stevensuslipayload2627 layer to your build
-=================================================
+=============================================================
 
-Run 'bitbake-layers add-layer meta-stevensuslipayload2627'
+From an initialized wrynose build directory with meta-raspberrypi already added, run:
+
+  bitbake-layers add-layer meta-stevensuslipayload2627
+  bitbake-config-build enable-fragment machine/payload-pi4b
+  bitbake-config-build enable-fragment distro/rocketrypayload
+  bitbake payload-os-image
 
 II. Misc
 ========
 
---- replace with specific information about the meta-stevensuslipayload2627 layer ---
+Machine: conf/machine/payload-pi4b.conf
+
+  Raspberry Pi 4B, 64-bit. Extends raspberrypi4-64 from meta-raspberrypi and keeps its
+  overrides active. Enables the serial console on GPIO 14/15 and sets the hostname to
+  payload-dev-4B.
+
+Distro: conf/distro/rocketrypayload.conf
+
+  Stevens Rocketry USLI Payload OS, version 0.1. Based on Poky with systemd as the init
+  manager. Accepts the synaptics-killswitch license required by the Pi 4 Wi-Fi/Bluetooth
+  firmware.
+
+Image: recipes-core/images/payload-os-image.bb
+
+  Installs packagegroup-core-boot, packagegroup-rpi-test, procps, coreutils and util-linux
+  on a root filesystem of at least 1 GiB. Builds only for Raspberry Pi machines.
+
+  This is currently a development image: root has an empty password and is logged in
+  automatically on the serial console. Remove the EXTRA_IMAGE_FEATURES line before
+  building for flight.
