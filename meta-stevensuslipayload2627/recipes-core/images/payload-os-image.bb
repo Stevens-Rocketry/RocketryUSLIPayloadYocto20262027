@@ -1,6 +1,6 @@
 SUMMARY = "The custom image for use with the Stevens USLI 2027 payload computer."
 
-IMAGE_INSTALL = "packagegroup-core-boot ${CORE_IMAGE_EXTRA_INSTALL} packagegroup-rpi-test procps coreutils util-linux"
+IMAGE_INSTALL = "packagegroup-core-boot ${CORE_IMAGE_EXTRA_INSTALL} packagegroup-rpi-test procps coreutils util-linux tsservice"
 
 LICENSE = "MIT"
 
