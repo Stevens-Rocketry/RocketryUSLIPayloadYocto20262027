@@ -11,6 +11,7 @@ DEPENDS = "systemd"
 
 inherit systemd
 SYSTEMD_SERVICE:${PN} = "test.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
 do_install() {
     install -d ${D}${bindir}
