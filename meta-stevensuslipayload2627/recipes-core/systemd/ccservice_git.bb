@@ -2,7 +2,7 @@ SUMMARY = "command and control service daemon"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "git://github.com/Stevens-Rocketry/USLI2027-Command-and-Control-Service.git;protocol=https;branch=initial_implementation"
+SRC_URI = "git://github.com/Stevens-Rocketry/USLI2027-Command-and-Control-Service.git;protocol=https;branch=main"
 #We prevent pushing to main without a PR so this is safe
 SRCREV = "${AUTOREV}"
 PV = "1.0+git"
