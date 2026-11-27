@@ -1,0 +1,23 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2711";
+
+	fragment@0 {
+		target = <&i2c_arm>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			imu@6a {
+				compatible = "st,lsm6ds3tr-c";
+				reg = <0x6a>;
+				interrupt-parent = <&gpio>;
+				interrupts = <17 1>;   /* GPIO17, IRQ_TYPE_EDGE_RISING */
+				st,drdy-int-pin = <1>;
+			};
+		};
+	};
+};
